@@ -1,5 +1,6 @@
 var Rooms = {
-  initialRooms: []
+  roomList: [],
+  currentRoom: [],
 };
 
 // Rooms.prototype.add = function (v) {

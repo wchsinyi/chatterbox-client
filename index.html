@@ -27,14 +27,18 @@
   <div id="main">
     <h1>chatterbox</h1>
     <div class="spinner"><img src="client/images/spiffygif_46x46.gif"></div>
-    <div id="rooms">
+
+
+    <div id="rooms" action="#" method="post">
       Room:
       <select>
-        <option value='new room'>ALL ROOM</option>
+        <option value='new room'>ALL_ROOM</option>
       </select>
       <input type="text" name="roomName" id="roomName" />
-      <button id="addRoom" type="submit">Add Room</button>
+      <button id="addRoom" type="submit" name="room">Add Room</button>
     </div>
+
+
     <form action="#" id="send" method="post">
       <input type="text" name="message" id="message" />
       <input type="submit" name="submit" class="submit" />
@@ -48,7 +52,7 @@
   <script src="client/scripts/messages.js"></script>
   <script src="client/scripts/formView.js"></script>
   <script src="client/scripts/roomsView.js"></script>
-  <script src="client/scripts/roomFormView.js"></script>
+  <!-- <script src="client/scripts/roomFormView.js"></script> -->
   <script src="client/scripts/messageView.js"></script>
   <script src="client/scripts/messagesView.js"></script>
   <script src="client/scripts/app.js"></script>

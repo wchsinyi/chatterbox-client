@@ -8,11 +8,8 @@ var RoomsView = {
   },
 
 
-  render: function () {
-    // debugger;
-    var resultArr = Messages.initialData.results;
-
-    console.log('room ', Messages.initialData);
+  render: function (data) {
+    var resultArr = data.results;
     var uniqueRooms = [];
     for (let i = 0; i < resultArr.length; i++) {
       if (!uniqueRooms.includes(resultArr[i].roomname)) {
@@ -20,7 +17,7 @@ var RoomsView = {
         uniqueRooms.push(resultArr[i].roomname);
       }
     }
-
+    Rooms.roomList = uniqueRooms;
   },
 
 
