@@ -8,26 +8,11 @@ var FormView = {
 
   handleSubmit: function (event) {
     // Stop the browser from submitting the form
-
     event.preventDefault();
-    // debugger;
-    console.log('click!');
-    console.log(this);
-    console.log(App.username);
+    var username = App.username;
     var txt = $('#message').val();
-    console.log(txt);
-
-
-    var newMsg = new Messages(App.username, txt);
-
+    var newMsg = new Messages(username, txt);
     Parse.create(newMsg);
-    console.log(newMsg);
-    // Parse.create(currentMsg)
-    // $('.submit').on('click', function (event) {
-    //   $('#chat').append('<span>hi</span>');
-    // });
-
-
   },
 
   setStatus: function (active) {

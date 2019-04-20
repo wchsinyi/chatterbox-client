@@ -7,26 +7,34 @@ var MessagesView = {
     this.render();
   },
 
+
   render: function () {
     // debugger;
     Parse.readAll(function (arr) {
       var resultArr = arr.results;
-      console.log(Array.isArray(arr));
-      for (let index = 0; index < resultArr.length; index++) {
-        MessagesView.renderMessage(resultArr[index]);
+      for (let i = 0; i < resultArr.length; i++) {
+        MessagesView.renderMessage(resultArr[i]);
       }
     });
   },
 
-  renderMessage: function (message) {
-    // console.log(MessageView);
-    // console.log(this.$chats)
+  renderMessage: function (msg) {
+    msg = this.escapeHtml(msg);
     var currentMsg = MessageView.render({
-      username: message.username, text: message.text
+      username: msg.username, text: msg.text
     });
     this.$chats.append(currentMsg);
-  }
+  },
 
+  escapeHtml: function (unsafe) {
+    unsafe.text = unsafe.text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+    return unsafe;
+  }
 
 };
 
