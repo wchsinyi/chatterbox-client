@@ -11,7 +11,7 @@ var FormView = {
     event.preventDefault();
     var username = App.username;
     var txt = $('#message').val();
-    var newMsg = new Messages(username, txt);
+    var newMsg = new Messages.makeNewMsg(username, txt);
     Parse.create(newMsg);
   },
 

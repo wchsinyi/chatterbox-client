@@ -21,7 +21,7 @@ var App = {
       (data) => {
         // examine the response from the server request:
         console.log(data);
-
+        Messages.initialStorage = data;
         callback();
       });
   },

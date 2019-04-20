@@ -1,31 +1,37 @@
 var RoomsView = {
   $button: $('#rooms button'),
   $select: $('#rooms select'),
-  roomList: [],
+
 
 
   initialize: function () {
-    this.render();
+    // this.render();
 
   },
 
+
   allRooms: function () {
-    Parse.readAll(function (arr) {
-      var resultArr = arr.results;
-      for (let i = 0; i < resultArr.length; i++) {
-        RoomsView.roomList.push(resultArr[i].roomname);
-      }
-    });
-    RoomsView.roomList = RoomsView.roomList.filter((i, idx, arr) => arr.indexOf(i) === idx);
+    var roomList = [];
+    var resultArr = Messages.initialStorage.results;
+    console.log('resultArr', resultArr);
+    for (let i = 0; i < resultArr.length; i++) {
+      roomList.push(resultArr[i].roomname);
+    }
+    console.log('rooms', roomList);
+    debugger;
+    var uniqueRooms = roomList.filter((i, idx, arr) => arr.indexOf(i) === idx);
+    console.log('uniqueRooms', uniqueRooms);
+    return uniqueRooms;
   },
 
 
   render: function () {
-    this.allRooms();
-    var allR = RoomsView.roomList;
+    var allR = this.allRooms();
     for (let j = 0; j < allR.length; j++) {
       RoomsView.renderRoom(allR[j]);
     }
+
+
   },
 
   renderRoom: function (roomName) {
