@@ -1,5 +1,5 @@
 body {
-    background: #eee;
+    background: #32CD32;
     text-align: center;
     padding: 0 25px;
     font-family: arial, sans-serif;
@@ -62,7 +62,7 @@ form input[type=text] {
 .chat {
     padding: 5px;
     margin-bottom: 5px;
-    background-color: #eee;
+    background-color: #00FF00;
 }
 
 .chat .username {

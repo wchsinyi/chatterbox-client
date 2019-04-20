@@ -5,6 +5,7 @@ var App = {
   username: 'anonymous',
 
   initialize: function () {
+    // debugger;
     App.username = window.location.search.substr(10);
 
     FormView.initialize();
@@ -14,19 +15,43 @@ var App = {
     // Fetch initial batch of messages
     App.startSpinner();
     App.fetch(App.stopSpinner);
+    App.fetch2(App.stopSpinner);
+
+
   },
 
   fetch: function (callback = () => { }) {
     Parse.readAll(
       (data) => {
         // examine the response from the server request:
-        console.log(data);
-        Messages.initialStorage = data;
+        for (let i = 0; i < data.results.length; i++) {
+          if (data.results[i].roomname) {
+            data.results[i].roomname = data.results[i].roomname.replace(/ /g, '_');
+          } else {
+            data.results[i].roomname = 'panic_room';
+          }
+        }
+        Messages.initialData = data;
+        MessagesView.render();
         callback();
       });
   },
 
-
+  fetch2: function (callback = () => { }) {
+    Parse.readAll(
+      (data) => {
+        for (let i = 0; i < data.results.length; i++) {
+          if (data.results[i].roomname) {
+            data.results[i].roomname = data.results[i].roomname.replace(/ /g, '_');
+          } else {
+            data.results[i].roomname = 'panic_room';
+          }
+        }
+        Messages.initialData = data;
+        RoomsView.render();
+        callback();
+      });
+  },
   startSpinner: function () {
     App.$spinner.show();
     FormView.setStatus(true);

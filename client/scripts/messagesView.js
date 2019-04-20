@@ -4,37 +4,38 @@ var MessagesView = {
   $chats: $('#chats'),
 
   initialize: function () {
-    this.render();
   },
 
-
   render: function () {
-    // debugger;
-    Parse.readAll(function (arr) {
-      var resultArr = arr.results;
-      for (let i = 0; i < resultArr.length; i++) {
-        MessagesView.renderMessage(resultArr[i]);
-      }
-    });
+    var resultArr = Messages.initialData.results;
+    for (let i = 0; i < resultArr.length; i++) {
+      MessagesView.renderMessage(resultArr[i]);
+    }
   },
 
   renderMessage: function (msg) {
-    msg = this.escapeHtml(msg);
+    // msg = this.escapeHtml(msg);
+    // console.log(msg.roomname);
+    // msg.roomname.forEach(function (each) {
+    //   each = each.replace(/\s/g, "hi");
+    // })
+    // console.log(msg.roomname.replace(/ /g, '_'));
+
     var currentMsg = MessageView.render({
-      username: msg.username, text: msg.text
+      username: msg.username, text: msg.text, roomname: msg.roomname
     });
     this.$chats.append(currentMsg);
   },
 
-  escapeHtml: function (unsafe) {
-    unsafe.text = unsafe.text
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-    return unsafe;
-  }
+  // escapeHtml: function (unsafe) {
+  //   unsafe.text = unsafe.text
+  //     .replace(/&/g, "&amp;")
+  //     .replace(/</g, "&lt;")
+  //     .replace(/>/g, "&gt;")
+  //     .replace(/"/g, "&quot;")
+  //     .replace(/'/g, "&#039;");
+  //   return unsafe;
+  // }
 
 };
 
