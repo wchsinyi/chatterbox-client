@@ -4,12 +4,12 @@ var FormView = {
   $rooms: $('button'),
   $select: $('#rooms select'),
   $option: $('select'),
-  // $hi: $('select').find(":selected"),
 
   initialize: function () {
     FormView.$form.on('submit', FormView.handleSubmit);
     FormView.$rooms.on('click', FormView.handleRoomSubmit);
     FormView.$option.on('change', FormView.filterRoom);
+    $('body').on('click', '.username', FormView.beFriend);
   },
 
   handleSubmit: function (event) {
@@ -22,11 +22,15 @@ var FormView = {
   },
 
   handleRoomSubmit: function (event) {
+    console.log('hiii');
+    debugger;
     event.preventDefault();
-    if (!Rooms.roomList.includes(roomname)) {
+    if (!$('#roomName').val() !== undefined) {
       var roomname = $('#roomName').val().replace(/ /g, '_');
-      FormView.$select.append("<option>" + roomname + "</option>");
-      Rooms.roomList.push(roomname);
+      if (!Rooms.roomList.includes(roomname)) {
+        FormView.$select.append("<option>" + roomname + "</option>");
+        Rooms.roomList.push(roomname);
+      }
     }
   },
 
@@ -45,9 +49,19 @@ var FormView = {
     }
   },
 
+  beFriend: function (event) {
+    event.preventDefault();
+    console.log("hi")
+    console.log(typeof this);
+    console.log($(this).parent());
+    $(this).parent().toggleClass('test')
+    // this.parent().css("background-color", "red");
+  },
   setStatus: function (active) {
     var status = active ? 'true' : null;
     FormView.$form.find('input[type=submit]').attr('disabled', status);
   }
 
 };
+
+// event.target.innerHTML
