@@ -4,7 +4,8 @@ var App = {
 
   username: 'anonymous',
 
-  initialize: function() {
+  initialize: function () {
+    // debugger;
     App.username = window.location.search.substr(10);
 
     FormView.initialize();
@@ -15,23 +16,33 @@ var App = {
     App.startSpinner();
     App.fetch(App.stopSpinner);
 
+
   },
 
-  fetch: function(callback = ()=>{}) {
-    Parse.readAll((data) => {
-      // examine the response from the server request:
-      console.log(data);
-
-      callback();
-    });
+  fetch: function (callback = () => { }) {
+    Parse.readAll(
+      (data) => {
+        // examine the response from the server request:
+        for (let i = 0; i < data.results.length; i++) {
+          if (data.results[i].roomname) {
+            data.results[i].roomname = data.results[i].roomname.replace(/ /g, '_');
+          } else {
+            data.results[i].roomname = 'panic_room';
+          }
+        }
+        Messages.initialData = data;
+        MessagesView.render(Messages.initialData);
+        RoomsView.render(Messages.initialData);
+        callback();
+      });
   },
 
-  startSpinner: function() {
+  startSpinner: function () {
     App.$spinner.show();
     FormView.setStatus(true);
   },
 
-  stopSpinner: function() {
+  stopSpinner: function () {
     App.$spinner.fadeOut('fast');
     FormView.setStatus(false);
   }
