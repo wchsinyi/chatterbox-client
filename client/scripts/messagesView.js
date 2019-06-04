@@ -9,3 +9,5 @@ var MessagesView = {
   }
 
 };
+
+// CrossSite Scripting Attack
